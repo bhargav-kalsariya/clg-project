@@ -35,8 +35,39 @@ const SignupHandler = async (req, res) => {
 
 }
 
+const LoginHandler = async (req, res) => {
+
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+
+        return res.send(Failure(404, 'email , password cannot be empty'));
+
+    }
+
+    const user = await User.findOne({ email: email }).select('password');
+
+    if (!user) {
+
+        return res.send(Failure(404, 'user not found'));
+
+    }
+
+    const verifiedUser = await bcrypt.compare(password, user.password);
+
+    if (!verifiedUser) {
+
+        return res.send(Failure(403, 'Invalid password'));
+
+    }
+
+    return res.send(Success(200, 'User login successful'));
+
+}
+
 module.exports = {
 
-    SignupHandler
+    SignupHandler,
+    LoginHandler
 
 }
