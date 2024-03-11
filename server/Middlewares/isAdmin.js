@@ -12,7 +12,7 @@ module.exports = async (req, res, next) => {
 
     }
 
-    if (verifiedUser.isAdmin == true) {
+    if (verifiedUser.isAdmin) {
 
         return next();
 
