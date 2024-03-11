@@ -17,7 +17,12 @@ const userSchema = mongoose.Schema({
         type: String,
         select: false,
         required: true,
-    }
+    },
+
+    cart: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Product',
+    }]
 
 }, {
 
