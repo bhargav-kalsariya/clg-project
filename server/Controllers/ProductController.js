@@ -21,7 +21,7 @@ const createProductHandler = async (req, res) => {
 
     try {
 
-        const createdProduct = await Product.create({
+        await Product.create({
             title,
             description,
             image,
@@ -29,7 +29,7 @@ const createProductHandler = async (req, res) => {
             quantity
         });
 
-        return res.send(Success(201, { createdProduct }));
+        return res.send(Success(201, 'product created successfully'));
 
     } catch (error) {
 
