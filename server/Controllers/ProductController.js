@@ -1,4 +1,5 @@
 const { Product } = require("../Models/ProductSchema");
+const { Category } = require("../Models/CategorySchema");
 const { Success, Failure } = require("../utilities/ResponseWrapper");
 
 const getAllProductsHandler = async (req, res) => {
@@ -11,9 +12,9 @@ const getAllProductsHandler = async (req, res) => {
 
 const createProductHandler = async (req, res) => {
 
-    const { title, description, image, price, quantity } = req.body;
+    const { title, description, image, price, quantity, category } = req.body;
 
-    if (!title || !description || !image || !price || !quantity) {
+    if (!title || !description || !image || !price || !quantity || !category) {
 
         return res.send(Failure(404, 'All fields are required'));
 
@@ -21,15 +22,22 @@ const createProductHandler = async (req, res) => {
 
     try {
 
-        await Product.create({
+        const createdProduct = await Product.create({
             title,
             description,
             image,
             price,
-            quantity
+            quantity,
+            category
         });
 
-        return res.send(Success(201, 'product created successfully'));
+        const categoryId = createdProduct.category;
+        const currentCategory = await Category.findById(categoryId);
+
+        currentCategory.products.push(createdProduct._id);
+
+        await currentCategory.save();
+        return res.send(Success(201, 'Product created successfully'));
 
     } catch (error) {
 
