@@ -1,6 +1,20 @@
 const { Category } = require("../Models/CategorySchema");
 const { Failure, Success } = require("../utilities/ResponseWrapper");
 
+const getAllCategoiesHandler = async (req, res) => {
+
+    const category = await Category.find();
+
+    if (!category) {
+
+        return res.send(Failure(404, 'category not found'));
+
+    }
+
+    return res.send(Success(200, { category }));
+
+};
+
 const createCategoryHandler = async (req, res) => {
 
     const { name } = req.body;
@@ -29,6 +43,7 @@ const createCategoryHandler = async (req, res) => {
 
 module.exports = {
 
+    getAllCategoiesHandler,
     createCategoryHandler
 
 }
