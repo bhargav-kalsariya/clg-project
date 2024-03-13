@@ -8,7 +8,23 @@ const getAllProductsHandler = async (req, res) => {
 
     return res.send(Success(200, { products }));
 
-}
+};
+
+const getParticularProductHandler = async (req, res) => {
+
+    const { productId } = req.params;
+
+    const productDetails = await Product.findById(productId);
+
+    if (!productDetails) {
+
+        return res.send(Failure(404, 'product not found'));
+
+    };
+
+    return res.send(Success(200, { productDetails }));
+
+};
 
 const createProductHandler = async (req, res) => {
 
@@ -50,6 +66,7 @@ const createProductHandler = async (req, res) => {
 module.exports = {
 
     getAllProductsHandler,
+    getParticularProductHandler,
     createProductHandler
 
-}
+};

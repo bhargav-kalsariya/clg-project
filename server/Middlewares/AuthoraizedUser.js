@@ -40,7 +40,7 @@ module.exports = async (req, res, next) => {
 
     } catch (error) {
 
-        return res.send(Failure(403, 'token is invalid'));
+        return res.send(Failure(401, 'token is invalid'));
 
     }
 
