@@ -5,13 +5,6 @@ const { Failure, Success } = require("../utilities/ResponseWrapper");
 const addProductToCartHandler = async (req, res) => {
 
     const currentUserId = req._id;
-
-    if (!currentUserId) {
-
-        return res.send(Failure(404, "user not found"));
-
-    }
-
     const currentUser = await User.findById(currentUserId);
 
     try {
@@ -38,8 +31,42 @@ const addProductToCartHandler = async (req, res) => {
 
 };
 
+const removeProductFromCartHandler = async (req, res) => {
+
+    const currentUserId = req._id;
+    const currentUser = await User.findById(currentUserId);
+
+    try {
+
+        const { productId } = req.body;
+
+        const product = currentUser.cart.find((product) => product._id == productId);
+        const index = currentUser.cart.indexOf(product);
+
+        if (index !== -1) {
+
+            currentUser.cart.splice(index, 1);
+            await currentUser.save();
+
+        } else {
+
+            return res.send(Failure(404, "Product not found in cart"));
+
+        }
+
+        return res.send(Success(200, 'Product removed successfully'));
+
+    } catch (error) {
+
+        return res.send(Failure(500, "no product found to remove" + error.message));
+
+    }
+
+};
+
 module.exports = {
 
-    addProductToCartHandler
+    addProductToCartHandler,
+    removeProductFromCartHandler,
 
 };
