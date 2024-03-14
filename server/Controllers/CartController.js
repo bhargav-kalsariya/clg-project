@@ -31,6 +31,41 @@ const addProductToCartHandler = async (req, res) => {
 
 };
 
+const updateProductQuantityHandler = async (req, res) => {
+
+    const currentUserId = req._id;
+    const currentUser = await User.findById(currentUserId).populate({
+        path: 'cart'
+    });
+
+    try {
+
+        const { productId } = req.body;
+
+        const product = await currentUser.cart.find((product) => product.id == productId);
+        const index = currentUser.cart.indexOf(product);
+
+        if (index === -1) {
+
+            return res.send(Failure(404, "Product not found in cart"));
+
+        } else {
+
+            currentUser.cart[index].quantity += 1;
+
+            await currentUser.save();
+            return res.send(Success(200, { cart: currentUser.cart[index].quantity }));
+
+        }
+
+    } catch (error) {
+
+        return res.send(Failure(500, "no product found to increase quantity " + error.message));
+
+    }
+
+};
+
 const removeProductFromCartHandler = async (req, res) => {
 
     const currentUserId = req._id;
@@ -68,5 +103,6 @@ module.exports = {
 
     addProductToCartHandler,
     removeProductFromCartHandler,
+    updateProductQuantityHandler
 
 };
