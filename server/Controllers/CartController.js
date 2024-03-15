@@ -53,14 +53,59 @@ const updateProductQuantityHandler = async (req, res) => {
 
             currentUser.cart[index].quantity += 1;
 
+            await product.save();
             await currentUser.save();
-            return res.send(Success(200, { cart: currentUser.cart[index].quantity }));
+            return res.send(Success(200, { currentUser }));
 
         }
 
     } catch (error) {
 
         return res.send(Failure(500, "no product found to increase quantity " + error.message));
+
+    }
+
+};
+
+const decreaseProductQuantityHandler = async (req, res) => {
+
+    const currentUserId = req._id;
+    const currentUser = await User.findById(currentUserId).populate({
+        path: 'cart'
+    });
+
+    try {
+
+        const { productId } = req.body;
+
+        const product = await currentUser.cart.find((product) => product.id == productId);
+        const index = currentUser.cart.indexOf(product);
+
+        if (index === -1) {
+
+            return res.send(Failure(404, "Product not found in cart"));
+
+        } else {
+
+            if (currentUser.cart[index].quantity > 1) {
+
+                currentUser.cart[index].quantity -= 1;
+
+            } else {
+
+                currentUser.cart[index].quantity = 1;
+
+            }
+
+            await product.save();
+            await currentUser.save();
+            return res.send(Success(200, { currentUser }));
+
+        }
+
+    } catch (error) {
+
+        return res.send(Failure(500, "no product found to decrease quantity " + error.message));
 
     }
 
@@ -103,6 +148,7 @@ module.exports = {
 
     addProductToCartHandler,
     removeProductFromCartHandler,
-    updateProductQuantityHandler
+    updateProductQuantityHandler,
+    decreaseProductQuantityHandler
 
 };
