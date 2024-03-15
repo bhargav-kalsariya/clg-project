@@ -93,7 +93,7 @@ const decreaseProductQuantityHandler = async (req, res) => {
 
             } else {
 
-                currentUser.cart[index].quantity = 1;
+                currentUser.cart.splice(index, 1);
 
             }
 
