@@ -59,7 +59,7 @@ const updateProductQuantityHandler = async (req, res) => {
 
             await product.save();
             await currentUser.save();
-            return res.send(Success(200, { currentUser }));
+            return res.send(Success(200, 'quantity increase successfully'));
 
         }
 
@@ -106,7 +106,7 @@ const decreaseProductQuantityHandler = async (req, res) => {
 
             await product.save();
             await currentUser.save();
-            return res.send(Success(200, { currentUser }));
+            return res.send(Success(200, 'quantity decrease successfully'));
 
         }
 
