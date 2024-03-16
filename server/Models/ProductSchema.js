@@ -28,12 +28,6 @@ const productSchema = mongoose.Schema({
         ref: 'Category',
     },
 
-    quantity: {
-        type: Number,
-        required: true,
-        min: 0
-    }
-
 }, {
 
     timestamps: true,

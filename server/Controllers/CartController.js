@@ -18,7 +18,7 @@ const addProductToCartHandler = async (req, res) => {
 
         }
 
-        currentUser.cart.push(product._id);
+        currentUser.cart.push({ product: product._id, quantity: 1 });
         await currentUser.save();
 
         return res.send(Success(200, "product added to cart successfully"));
@@ -35,14 +35,17 @@ const updateProductQuantityHandler = async (req, res) => {
 
     const currentUserId = req._id;
     const currentUser = await User.findById(currentUserId).populate({
-        path: 'cart'
+        path: 'cart',
+        populate: {
+            path: 'product'
+        }
     });
 
     try {
 
         const { productId } = req.body;
 
-        const product = await currentUser.cart.find((product) => product.id == productId);
+        const product = await currentUser.cart.find((product) => product.product._id == productId);
         const index = currentUser.cart.indexOf(product);
 
         if (index === -1) {
@@ -51,6 +54,7 @@ const updateProductQuantityHandler = async (req, res) => {
 
         } else {
 
+            console.log(currentUser.cart);
             currentUser.cart[index].quantity += 1;
 
             await product.save();
@@ -71,14 +75,17 @@ const decreaseProductQuantityHandler = async (req, res) => {
 
     const currentUserId = req._id;
     const currentUser = await User.findById(currentUserId).populate({
-        path: 'cart'
+        path: 'cart',
+        populate: {
+            path: "product",
+        }
     });
 
     try {
 
         const { productId } = req.body;
 
-        const product = await currentUser.cart.find((product) => product.id == productId);
+        const product = await currentUser.cart.find((product) => product.product._id == productId);
         const index = currentUser.cart.indexOf(product);
 
         if (index === -1) {
@@ -120,7 +127,7 @@ const removeProductFromCartHandler = async (req, res) => {
 
         const { productId } = req.body;
 
-        const product = currentUser.cart.find((product) => product._id == productId);
+        const product = currentUser.cart.find((product) => product.product._id == productId);
         const index = currentUser.cart.indexOf(product);
 
         if (index !== -1) {

@@ -28,9 +28,9 @@ const getParticularProductHandler = async (req, res) => {
 
 const createProductHandler = async (req, res) => {
 
-    const { title, description, image, price, quantity, category } = req.body;
+    const { title, description, image, price, category } = req.body;
 
-    if (!title || !description || !image || !price || !quantity || !category) {
+    if (!title || !description || !image || !price || !category) {
 
         return res.send(Failure(404, 'All fields are required'));
 
@@ -43,7 +43,6 @@ const createProductHandler = async (req, res) => {
             description,
             image,
             price,
-            quantity,
             category
         });
 
