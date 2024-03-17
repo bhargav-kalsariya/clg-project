@@ -10,18 +10,33 @@ const addProductToCartHandler = async (req, res) => {
     try {
 
         const { productId } = req.body;
-        const product = await Product.findById(productId);
 
-        if (!product) {
+        const AlreadyInCart = currentUser.cart.find((product) => product.product._id == productId);
 
-            return res.send(Failure(404, "product not found"));
+        if (AlreadyInCart) {
+
+            AlreadyInCart.quantity += 1;
+
+            await currentUser.save();
+            return res.send(Success(200, "product quantity increased by 1"));
+
+        } else {
+
+            const product = await Product.findById(productId);
+
+            if (!product) {
+
+                return res.send(Failure(404, "product not found"));
+
+            }
+
+            currentUser.cart.push({ product: product._id, quantity: 1 });
+            await currentUser.save();
+
+            return res.send(Success(200, "product added to cart successfully"));
 
         }
 
-        currentUser.cart.push({ product: product._id, quantity: 1 });
-        await currentUser.save();
-
-        return res.send(Success(200, "product added to cart successfully"));
 
     } catch (error) {
 
