@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-const fetchAllProducts = createAsyncThunk('getAllProducts', async () => {
+export const fetchAllProducts = createAsyncThunk('getAllProducts', async () => {
 
     const products = await fetch('https://api.escuelajs.co/api/v1/products');
     const Allproducts = await products.json();
