@@ -1,13 +1,4 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-
-export const fetchAllProducts = createAsyncThunk('getAllProducts', async () => {
-
-    const products = await fetch('https://api.escuelajs.co/api/v1/products');
-    const Allproducts = await products.json();
-
-    return Allproducts;
-
-});
+import { createSlice } from '@reduxjs/toolkit';
 
 const productSlice = createSlice({
 
@@ -22,13 +13,6 @@ const productSlice = createSlice({
         loadProducts: (state, action) => {
             state.products = action.payload;
         }
-
-    },
-    extraReducers: function (builder) {
-
-        builder.addCase(fetchAllProducts.fulfilled, (state, action) => {
-            state.products = action.payload;
-        })
 
     }
 
