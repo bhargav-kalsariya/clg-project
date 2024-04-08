@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { KEY_ACCESS_TOKEN, getToken } from './localStorageManager';
+import { KEY_ACCESS_TOKEN, getToken, removeToken, setToken } from './localStorageManager';
 
 export const axiosClient = axios.create({
 
@@ -19,4 +19,49 @@ axiosClient.interceptors.request.use(
 
     }
 
-)
+);
+
+axiosClient.interceptors.response.use(
+
+    async (res) => {
+
+        const response = res.data;
+
+        if (response.status === 'success') {
+
+            return res;
+
+        }
+
+        if (response.statusCode === 401) {
+
+            const result = await axios.create({
+
+                withCredentials: true,
+
+            }).get(`${process.env.REACT_APP_SERVER_BASE_URL}/auth/refresh`);
+
+            console.log({ res: result.data });
+
+            if (result.data.status === 'success') {
+
+                const accessToken = result.data.result.accessToken;
+                setToken(KEY_ACCESS_TOKEN, accessToken);
+                res.config.headers['Authorization'] = `Bearer ${accessToken}`;
+
+                return axios(res.config);
+
+            } else {
+
+                removeToken(KEY_ACCESS_TOKEN);
+                window.location.replace('/login');
+
+                return Promise.reject(result.data.message);
+
+            }
+
+        }
+
+    }
+
+);

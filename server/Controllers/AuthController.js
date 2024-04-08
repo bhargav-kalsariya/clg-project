@@ -93,21 +93,30 @@ const refreshTokenHandler = (req, res) => {
 
     if (!cookies.jwt) {
 
-        return res.send(Failure(401, 'Refresh token in cookie required'));
+        return res.send(Failure(404, 'Refresh token in cookie required'));
 
     }
 
-    const refreshToken = cookies.jwt;
+    try {
 
-    const decoded = jwt.verify(
-        refreshToken,
-        process.env.REFRESHTOKEN_PRIVATE_KEY
-    );
+        const refreshToken = cookies.jwt;
 
-    const _id = decoded._id;
-    const accessToken = generateAccessToken({ _id });
+        const decoded = jwt.verify(
+            refreshToken,
+            process.env.REFRESHTOKEN_PRIVATE_KEY
+        );
 
-    return res.send(Success(200, { accessToken }));
+        const _id = decoded._id;
+        const accessToken = generateAccessToken({ _id });
+
+        return res.send(Success(200, { accessToken }));
+
+    } catch (error) {
+
+        console.log(error);
+        return res.send(Failure(401, 'Invalid Refresh Token'));
+
+    }
 
 };
 
@@ -135,7 +144,7 @@ const generateAccessToken = (data) => {
     try {
 
         const accessToken = jwt.sign(data, process.env.ACCESSTOEKN_PRIVATE_KEY, {
-            expiresIn: '1d',
+            expiresIn: '20s',
         });
 
         return accessToken;
@@ -153,7 +162,7 @@ const generateRefreshToken = (data) => {
     try {
 
         const refreshToken = jwt.sign(data, process.env.REFRESHTOKEN_PRIVATE_KEY, {
-            expiresIn: '1y',
+            expiresIn: '40s',
         });
 
         return refreshToken;
