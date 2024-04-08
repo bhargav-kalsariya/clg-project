@@ -111,6 +111,25 @@ const refreshTokenHandler = (req, res) => {
 
 };
 
+const logoutHandler = (req, res) => {
+
+    try {
+
+        res.clearCookie('jwt', {
+            httpOnly: true,
+            secure: true
+        });
+
+        return res.send(Success(200, 'User logged out'));
+
+    } catch (e) {
+
+        return res.send(Failure(500, e.message));
+
+    }
+
+};
+
 const generateAccessToken = (data) => {
 
     try {
@@ -151,6 +170,7 @@ module.exports = {
 
     SignupHandler,
     LoginHandler,
-    refreshTokenHandler
+    refreshTokenHandler,
+    logoutHandler
 
 }
