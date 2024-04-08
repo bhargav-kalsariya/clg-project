@@ -87,6 +87,30 @@ const LoginHandler = async (req, res) => {
 
 }
 
+const refreshTokenHandler = (req, res) => {
+
+    const cookies = req.cookies;
+
+    if (!cookies.jwt) {
+
+        return res.send(Failure(401, 'Refresh token in cookie required'));
+
+    }
+
+    const refreshToken = cookies.jwt;
+
+    const decoded = jwt.verify(
+        refreshToken,
+        process.env.REFRESHTOKEN_PRIVATE_KEY
+    );
+
+    const _id = decoded._id;
+    const accessToken = generateAccessToken({ _id });
+
+    return res.send(Success(200, { accessToken }));
+
+};
+
 const generateAccessToken = (data) => {
 
     try {
@@ -126,6 +150,7 @@ const generateRefreshToken = (data) => {
 module.exports = {
 
     SignupHandler,
-    LoginHandler
+    LoginHandler,
+    refreshTokenHandler
 
 }
