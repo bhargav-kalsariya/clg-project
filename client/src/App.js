@@ -6,6 +6,7 @@ import Login from './pages/login/Login';
 import Home from './pages/home/Home';
 import AuthorizeUser from './components/AuthorizeUser';
 import IfNotLogin from './components/IfNotLogin';
+import Dashboard from './pages/dashboard/Dashboard';
 
 function App() {
     return (
@@ -14,6 +15,7 @@ function App() {
                 <Route element={<AuthorizeUser />}>
 
                     <Route path='/' element={<Home />}></Route>
+                    <Route path='/dashboard' element={<Dashboard />} ></Route>
 
                 </Route>
                 <Route element={<IfNotLogin />}>
