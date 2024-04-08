@@ -77,7 +77,7 @@ const LoginHandler = async (req, res) => {
 
         });
 
-        return res.send(Success(200, { accessToken }));
+        return res.send(Success(200, { accessToken, admin: user.isAdmin }));
 
     } catch (error) {
 
