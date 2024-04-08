@@ -11,9 +11,11 @@ function Login() {
     const naviget = useNavigate();
 
     async function handleSubmit(e) {
+
         e.preventDefault();
 
         try {
+
             const response = await axiosClient.post('/auth/login', {
                 email,
                 password
@@ -21,8 +23,11 @@ function Login() {
             console.log(response);
             setToken(KEY_ACCESS_TOKEN, response.data.result.accessToken);
             naviget('/');
+
         } catch (error) {
+
             console.error(error);
+
         }
 
     }

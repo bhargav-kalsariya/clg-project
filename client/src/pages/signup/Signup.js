@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Signup.scss';
 import { axiosClient } from './../../utilities/axiosClient';
 
@@ -8,7 +8,10 @@ function Signup() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    const navigate = useNavigate();
+
     async function handleSubmit(e) {
+
         e.preventDefault();
 
         const result = await axiosClient.post('/auth/signup', {
@@ -16,7 +19,16 @@ function Signup() {
             email,
             password
         });
-        console.log(result);
+
+        if (result.data.status === 'success') {
+
+            navigate('/login');
+
+        } else {
+
+            console.log(result.data);
+
+        }
     }
 
     return (
