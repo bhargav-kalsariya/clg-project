@@ -1,21 +1,31 @@
 import React, { useEffect } from 'react'
-import { axiosClient } from '../../utilities/axiosClient'
+import { useDispatch, useSelector } from 'react-redux';
+import { getMyProfile, isAdmin } from '../../redux/Slices/userSlice';
+import { Outlet, Navigate } from 'react-router-dom'
 
 function Home() {
 
-    async function fetchData() {
+    const dispatch = useDispatch();
 
-        const response = await axiosClient.get('/product/all');
-        console.log(response);
-
-    }
+    const myProfile = useSelector(state => state.userReducer?.myProfile);
+    const Admin = useSelector(state => state.userReducer?.isAdmin);
 
     useEffect(() => {
-        fetchData();
-    }, [])
+
+        dispatch(getMyProfile());
+
+    }, [dispatch]);
+
+    useEffect(() => {
+
+        if (myProfile?.isAdmin) {
+            dispatch(isAdmin(true));
+        }
+
+    }, [myProfile, dispatch]);
 
     return (
-        <div>Home</div>
+        Admin ? <Outlet /> : <h1>home page</h1>
     )
 }
 

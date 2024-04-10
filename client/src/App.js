@@ -14,8 +14,11 @@ function App() {
             <Routes>
                 <Route element={<AuthorizeUser />}>
 
-                    <Route path='/' element={<Home />}></Route>
-                    <Route path='/dashboard' element={<Dashboard />} ></Route>
+                    <Route path='/' element={<Home />}>
+
+                        <Route path='/dashboard' element={<Dashboard />} ></Route>
+
+                    </Route>
 
                 </Route>
                 <Route element={<IfNotLogin />}>
