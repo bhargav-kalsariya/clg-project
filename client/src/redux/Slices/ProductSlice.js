@@ -1,4 +1,17 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { axiosClient } from '../../utilities/axiosClient';
+
+export const fetchProducts = createAsyncThunk('fetch/products',
+
+    async () => {
+
+        const response = await axiosClient.get('/product/all');
+
+        return response.data;
+
+    }
+
+);
 
 const productSlice = createSlice({
 
@@ -8,16 +21,14 @@ const productSlice = createSlice({
         products: [],
 
     },
-    reducers: {
+    extraReducers: (builder) => {
 
-        loadProducts: (state, action) => {
+        builder.addCase(fetchProducts.fulfilled, (state, action) => {
             state.products = action.payload;
-        }
+        })
 
     }
 
 });
 
 export default productSlice.reducer;
-
-export const { loadProducts } = productSlice.actions;

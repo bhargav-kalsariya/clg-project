@@ -21,12 +21,7 @@ function Login() {
                 password
             });
 
-            const isAdmin = response.data.result.admin;
             setToken(KEY_ACCESS_TOKEN, response.data.result.accessToken);
-
-            if (isAdmin) {
-                return naviget('/dashboard');
-            }
 
             naviget('/');
 
