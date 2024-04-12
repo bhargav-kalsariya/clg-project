@@ -3,7 +3,7 @@ import './Collection.scss'
 import Product from '../../components/Product/Product'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux';
-import { axiosClient } from '../../utils/axiosClient';
+import { axiosClient } from '../../utilities/axiosClient';
 
 function Collection() {
 
@@ -25,7 +25,7 @@ function Collection() {
 
     async function fetchProducts() {
         const products = await axiosClient.get('/product/all');
-        setProducts(products.data.result);
+        setProducts(products.data.result.products);
     }
 
 
@@ -51,9 +51,9 @@ function Collection() {
                     <div className="sort-by">
                         <div className="sort-by-wrapper">
                             <h3 className='sort-by-text'>Sort By</h3>
-                            {/* <select className='select-sort-by' name="sort-by" id="sort-by" onChange={(e) => setSortBy(e.target.value)}>
+                            <select className='select-sort-by' name="sort-by" id="sort-by" onChange={(e) => setSortBy(e.target.value)}>
                                 {sortOptions.map((item) => <option value={item.sort} key={item.sort}>{item.value}</option>)}
-                            </select> */}
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -61,14 +61,14 @@ function Collection() {
                     <div className="filter-box">
                         <h3>Category</h3>
                         {categories?.map(item => (
-                            <div key={item.id} className="filter-radio">
+                            <div key={item._id} className="filter-radio">
                                 <input
                                     type="radio"
                                     name='category'
-                                    value={item.key}
+                                    value={item._id}
                                     id={item.id}
                                     onChange={updateCategory}
-                                    checked={item.key === categoryId}
+                                    checked={item._id === categoryId}
                                 />
                                 <label htmlFor={item._id}>{item.title}</label>
                             </div>))}

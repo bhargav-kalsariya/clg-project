@@ -9,6 +9,8 @@ import IfNotLogin from './components/IfNotLogin';
 import { useDispatch } from 'react-redux'
 import { fetchCategories } from './redux/Slices/CategorySlice';
 import Navbar from './components/Navbar/Navbar';
+import Collection from './pages/collection/Collection';
+import ProductDetail from './pages/productDetails/ProductDetails';
 
 function App() {
 
@@ -27,6 +29,8 @@ function App() {
                 <Route element={<AuthorizeUser />}>
 
                     <Route path='/' element={<Home />} />
+                    <Route path='/category/:categoryId?' element={<Collection />} />
+                    <Route path='/products/:productId' element={<ProductDetail />} />
 
 
                 </Route>

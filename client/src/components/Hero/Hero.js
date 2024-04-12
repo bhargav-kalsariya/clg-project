@@ -9,7 +9,7 @@ function Hero() {
             <div className="hero-content center">
                 <div className="heading">Exclusive print and Artwork</div>
                 <p className="subheading">Exclusive Art Pieces , for the Exclusive You</p>
-                <button className='btn-primary cta' onClick={() => { navigate('category') }}>Explore more</button>
+                <button className='btn-primary cta' onClick={() => { navigate('/category') }}>Explore more</button>
             </div>
         </div>
     )

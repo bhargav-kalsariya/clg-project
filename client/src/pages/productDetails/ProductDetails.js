@@ -1,24 +1,26 @@
 import React, { useEffect, useState } from 'react'
-import './ProductDetail.scss';
+import './ProductDetails.scss';
 import { useParams } from 'react-router-dom';
-import { axiosClient } from '../../utils/axiosClient';
-import Loader from '../../components/loader/Loader'
+import { axiosClient } from '../../utilities/axiosClient';
+// import Loader from '../../components/loader/Loader'
 import { useDispatch, useSelector } from 'react-redux';
-import { addToCart, removeFromCart } from '../../redux/cartSlice';
+import { addToCart, removeFromCart } from '../../redux/Slices/CartSlice';
 
 function ProductDetail() {
 
     const params = useParams();
-    const [product, setProduct] = useState(null);
+    const [product, setProduct] = useState({});
     const disPatch = useDispatch();
     const cart = useSelector(state => state.cartReducer.cart);
-    const quantity = cart.find(item => item.key === params.productId)?.quantity || 0;
+    const quantity = cart.find(item => item._id === params.productId)?.quantity || 0;
+
+    console.log(params.productId, { product });
 
     async function fetchData() {
-        const productResponse = await axiosClient.get(`/products?filters[key][$eq]=${params.productId}&populate=image`);
-        if (productResponse.data.data.length > 0) {
-            setProduct(productResponse.data.data[0]);
-        }
+
+        const productResponse = await axiosClient.get(`/product/${params.productId}`);
+        setProduct(productResponse.data.result.productDetails);
+
     }
     useEffect(() => {
         setProduct(null);
@@ -26,7 +28,8 @@ function ProductDetail() {
     }, [params])
 
     if (!product) {
-        return <Loader />;
+        // return <Loader />;
+        return <h1>no product avialable</h1>
     }
 
     return (
@@ -35,16 +38,16 @@ function ProductDetail() {
                 <div className="product-layout">
                     <div className="product-img center">
                         <img
-                            src={product?.attributes?.image.data.attributes.url}
+                            src={product?.image}
                             alt="product img" />
                     </div>
                     <div className="product-info">
                         <h1 className="heading">
-                            {product?.attributes.title}
+                            {product?.title}
                         </h1>
-                        <h3 className="price">₹ {product?.attributes?.price}</h3>
+                        <h3 className="price">₹ {product?.price}</h3>
                         <p className="description">
-                            {product?.attributes?.desc}
+                            {product?.description}
                         </p>
                         <div className="cart-options">
                             <div className="quantity-selector">
