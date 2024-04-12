@@ -8,6 +8,7 @@ import AuthorizeUser from './components/AuthorizeUser';
 import IfNotLogin from './components/IfNotLogin';
 import { useDispatch } from 'react-redux'
 import { fetchCategories } from './redux/Slices/CategorySlice';
+import Navbar from './components/Navbar/Navbar';
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
 
     return (
         <div className="App">
+            <Navbar />
             <Routes>
                 <Route element={<AuthorizeUser />}>
 
