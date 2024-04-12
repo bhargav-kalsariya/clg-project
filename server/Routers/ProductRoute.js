@@ -6,5 +6,6 @@ const isAdmin = require('../Middlewares/isAdmin');
 router.get('/all', AuthoraizedUser, ProductController.getAllProductsHandler);
 router.get('/:productId', AuthoraizedUser, ProductController.getParticularProductHandler);
 router.post('/create', AuthoraizedUser, isAdmin, ProductController.createProductHandler);
+router.post('/categoryWise/:categoryId', AuthoraizedUser, ProductController.getProductCategoryWiseHandler);
 
 module.exports = router;

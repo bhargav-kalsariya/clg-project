@@ -13,16 +13,6 @@ function Collection() {
     const [products, setProducts] = useState([]);
     const categories = useSelector(state => state.categoryReducer.categories);
 
-    const sortOptions = [{
-        value: 'price - Low To High',
-        sort: 'price'
-    }, {
-        value: 'Newest First',
-        sort: 'createdAt'
-    }];
-
-    const [sortBy, setSortBy] = useState(sortOptions[0].sort);
-
     async function fetchProducts() {
         const products = await axiosClient.get('/product/all');
         setProducts(products.data.result.products);
@@ -34,7 +24,7 @@ function Collection() {
         setCategoryId(params.categoryId);
         fetchProducts();
 
-    }, [params, sortBy])
+    }, [params])
 
     function updateCategory(e) {
         navigate(`/category/${e.target.value}`)
@@ -51,9 +41,9 @@ function Collection() {
                     <div className="sort-by">
                         <div className="sort-by-wrapper">
                             <h3 className='sort-by-text'>Sort By</h3>
-                            <select className='select-sort-by' name="sort-by" id="sort-by" onChange={(e) => setSortBy(e.target.value)}>
+                            {/* <select className='select-sort-by' name="sort-by" id="sort-by">
                                 {sortOptions.map((item) => <option value={item.sort} key={item.sort}>{item.value}</option>)}
-                            </select>
+                            </select> */}
                         </div>
                     </div>
                 </div>
@@ -66,7 +56,7 @@ function Collection() {
                                     type="radio"
                                     name='category'
                                     value={item._id}
-                                    id={item.id}
+                                    id={item._id}
                                     onChange={updateCategory}
                                     checked={item._id === categoryId}
                                 />

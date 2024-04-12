@@ -26,6 +26,20 @@ const getParticularProductHandler = async (req, res) => {
 
 };
 
+const getProductCategoryWiseHandler = async (req, res) => {
+
+    const { categoryId } = req.params;
+    const category = await Category.findById(categoryId).populate('products');
+
+    if (!category) {
+
+        return res.send(Failure(404, 'product not found with this category'));
+
+    }
+
+    return res.send(Success(200, { products: category.products }));
+}
+
 const createProductHandler = async (req, res) => {
 
     const { title, description, image, price, category } = req.body;
@@ -66,6 +80,7 @@ module.exports = {
 
     getAllProductsHandler,
     getParticularProductHandler,
-    createProductHandler
+    createProductHandler,
+    getProductCategoryWiseHandler
 
 };
