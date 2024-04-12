@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 import { Routes, Route } from 'react-router-dom'
 import Signup from './pages/signup/Signup';
@@ -6,8 +6,19 @@ import Login from './pages/login/Login';
 import Home from './pages/home/Home';
 import AuthorizeUser from './components/AuthorizeUser';
 import IfNotLogin from './components/IfNotLogin';
+import { useDispatch } from 'react-redux'
+import { fetchCategories } from './redux/Slices/CategorySlice';
 
 function App() {
+
+    const disPatch = useDispatch();
+
+    useEffect(() => {
+
+        disPatch(fetchCategories());
+
+    }, [disPatch])
+
     return (
         <div className="App">
             <Routes>
