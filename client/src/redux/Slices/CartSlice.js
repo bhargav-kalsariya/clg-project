@@ -7,14 +7,14 @@ const cartSlice = createSlice({
     },
     reducers: {
         addToCart: (state, action) => {
-            const product = action.payload.attributes;
+            const product = action.payload;
             const curItem = product ? {
                 title: product.title,
                 price: product.price,
-                image: product.image.data.attributes.url,
-                key: product.key
+                image: product.image,
+                _id: product._id
             } : action.payload;
-            const index = state.cart.findIndex(item => item.key === curItem.key);
+            const index = state.cart.findIndex(item => item._id === curItem._id);
             if (index === -1) {
                 state.cart.push({ ...curItem, quantity: 1 });
             } else {
@@ -22,11 +22,11 @@ const cartSlice = createSlice({
             }
         },
         removeFromCart: (state, action) => {
-            const curKey = action.payload?.attributes?.key || action.payload.key;
-            const index = state.cart.findIndex(item => item.key === curKey);
+            const curKey = action.payload?._id || action.payload._id;
+            const index = state.cart.findIndex(item => item._id === curKey);
             if (index === -1) return;
             if (state.cart[index].quantity === 1) {
-                state.cart = state.cart.filter(item => item.key !== curKey);
+                state.cart = state.cart.filter(item => item._id !== curKey);
             } else {
                 state.cart[index].quantity -= 1;
             }

@@ -2,9 +2,9 @@ import React from 'react'
 import './Cart.scss'
 import { AiOutlineClose } from 'react-icons/ai'
 import { useSelector } from 'react-redux';
-// import CartItem from '../cartItem/CartItem';
+import CartItem from '../CartItem/CartItem';
 import { BsCartX } from 'react-icons/bs';
-import { axiosClient } from '../../utilities/axiosClient'
+// import { axiosClient } from '../../utilities/axiosClient'
 // import { loadStripe } from '@stripe/stripe-js';
 
 // const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
@@ -37,7 +37,7 @@ function Cart({ onClose }) {
                     <div className="close-btn center" onClick={onClose}><AiOutlineClose /> Close</div>
                 </div>
                 <div className="cartItems">
-                    {/* {cart?.map(item => <CartItem cart={item} key={item.key} />)} */}
+                    {cart?.map(item => <CartItem cart={item} key={item._id} />)}
                 </div>
                 {isCartEmpty &&
                     <div className="empty-cart-info">
