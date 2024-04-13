@@ -33,7 +33,9 @@ axiosClient.interceptors.response.use(
 
         }
 
-        if (response.statusCode === 401) {
+        if (response.statusCode === 401 && !response.config.url_retry) {
+
+            response.config.url_retry = true;
 
             const result = await axios.create({
 
@@ -54,7 +56,7 @@ axiosClient.interceptors.response.use(
             } else {
 
                 removeToken(KEY_ACCESS_TOKEN);
-                window.location.replace('/login');
+                window.location.replace('/login', '_self');
 
                 return Promise.reject(result.data.message);
 
