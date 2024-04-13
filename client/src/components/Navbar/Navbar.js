@@ -19,8 +19,8 @@ function Navbar() {
                     <div className="nav-left">
                         <ul className='link-group'>
                             {categories?.map((category) => (
-                                <li className='hover-link' key={category._id}>
-                                    <Link className='link' to={`/category/${category._id}`}>{category.name}</Link>
+                                <li className='hover-link' key={category?._id}>
+                                    <Link className='link' to={`/category/${category?._id}`}>{category?.name}</Link>
                                 </li>
                             ))}
                         </ul>

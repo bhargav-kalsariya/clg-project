@@ -8,7 +8,7 @@ function Product({ product }) {
     const navigate = useNavigate();
 
     return (
-        <div className='Product' onClick={() => { navigate(`/products/${product?._id}`) }}>
+        <div className='Product' onClick={() => { navigate(`/products/${product._id}`) }}>
             <div className="product-container">
                 <div className="product-img">
                     <div className="img-container">

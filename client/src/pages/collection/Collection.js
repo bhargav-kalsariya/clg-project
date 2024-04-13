@@ -13,11 +13,20 @@ function Collection() {
     const [products, setProducts] = useState([]);
     const categories = useSelector(state => state.categoryReducer.categories);
 
+    const sortOptions = [{
+        value: 'price - Low To High',
+        sort: 'price'
+    }, {
+        value: 'Newest First',
+        sort: 'createdAt'
+    }];
+
+    const [sortBy, setSortBy] = useState(sortOptions[0].sort);
+
     async function fetchProducts() {
         const products = await axiosClient.get('/product/all');
         setProducts(products.data.result.products);
     }
-
 
     useEffect(() => {
 
@@ -41,9 +50,9 @@ function Collection() {
                     <div className="sort-by">
                         <div className="sort-by-wrapper">
                             <h3 className='sort-by-text'>Sort By</h3>
-                            {/* <select className='select-sort-by' name="sort-by" id="sort-by">
+                            <select className='select-sort-by' name="sort-by" id="sort-by" onChange={(e) => setSortBy(e.target.value)}>
                                 {sortOptions.map((item) => <option value={item.sort} key={item.sort}>{item.value}</option>)}
-                            </select> */}
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -60,7 +69,7 @@ function Collection() {
                                     onChange={updateCategory}
                                     checked={item._id === categoryId}
                                 />
-                                <label htmlFor={item._id}>{item.title}</label>
+                                <label htmlFor={item._id}>{item.name}</label>
                             </div>))}
                     </div>
                     <div className="product-box">

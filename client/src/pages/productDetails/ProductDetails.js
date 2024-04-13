@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react'
 import './ProductDetails.scss';
 import { useParams } from 'react-router-dom';
 import { axiosClient } from '../../utilities/axiosClient';
-// import Loader from '../../components/loader/Loader'
+import Loader from '../../components/Loader/Loader'
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart, removeFromCart } from '../../redux/Slices/CartSlice';
 
 function ProductDetail() {
 
     const params = useParams();
-    const [product, setProduct] = useState({});
+    const [product, setProduct] = useState(null);
     const disPatch = useDispatch();
     const cart = useSelector(state => state.cartReducer.cart);
     const quantity = cart.find(item => item._id === params.productId)?.quantity || 0;
@@ -28,8 +28,7 @@ function ProductDetail() {
     }, [params])
 
     if (!product) {
-        // return <Loader />;
-        return <h1>no product avialable</h1>
+        return <Loader />;
     }
 
     return (

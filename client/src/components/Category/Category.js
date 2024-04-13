@@ -5,9 +5,9 @@ import { useNavigate } from 'react-router-dom';
 function Category({ category }) {
     const navigate = useNavigate();
     return (
-        <div className='Category' onClick={() => navigate(`category/${category.attributes.key}`)}>
+        <div className='Category' onClick={() => navigate(`category/${category._id}`)}>
             <div className="category-content center">
-                <h3 className='heading'>{category.attributes?.name}</h3>
+                <h3 className='heading'>{category.name}</h3>
             </div>
         </div>
     )

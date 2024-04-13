@@ -22,7 +22,7 @@ const cartSlice = createSlice({
             }
         },
         removeFromCart: (state, action) => {
-            const curKey = action.payload?._id || action.payload._id;
+            const curKey = action.payload?._id;
             const index = state.cart.findIndex(item => item._id === curKey);
             if (index === -1) return;
             if (state.cart[index].quantity === 1) {
