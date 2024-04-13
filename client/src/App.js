@@ -11,6 +11,7 @@ import { fetchCategories } from './redux/Slices/CategorySlice';
 import Navbar from './components/Navbar/Navbar';
 import Collection from './pages/collection/Collection';
 import ProductDetail from './pages/productDetails/ProductDetails';
+import Footer from './components/Footer/Footer';
 
 function App() {
 
@@ -41,6 +42,7 @@ function App() {
 
                 </Route>
             </Routes>
+            <Footer />
         </div>
     );
 }
