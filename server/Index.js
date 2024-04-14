@@ -3,6 +3,13 @@ const connect = require("./Configs/Database");
 const dotenv = require('dotenv');
 const cors = require('cors');
 const cookie_parser = require('cookie-parser');
+const cloudinary = require('cloudinary').v2;
+
+cloudinary.config({
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.CLOUD_API_KEY,
+    api_secret: process.env.CLOUD_API_SECRET
+});
 
 dotenv.config('./.env');
 connect();

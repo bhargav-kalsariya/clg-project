@@ -1,6 +1,7 @@
 const { Product } = require("../Models/ProductSchema");
 const { Category } = require("../Models/CategorySchema");
 const { Success, Failure } = require("../utilities/ResponseWrapper");
+const cloudinary = require('cloudinary').v2;
 
 const getAllProductsHandler = async (req, res) => {
 
@@ -49,13 +50,19 @@ const createProductHandler = async (req, res) => {
         return res.send(Failure(404, 'All fields are required'));
 
     }
+    const cloudImg = cloudinary.uploader.upload(image, {
+        folder: 'clg project'
+    })
 
     try {
 
         const createdProduct = await Product.create({
             title,
             description,
-            image,
+            image: {
+                publicId: (await cloudImg).public_id,
+                url: (await cloudImg).url
+            },
             price,
             category
         });
@@ -66,7 +73,7 @@ const createProductHandler = async (req, res) => {
         currentCategory.products.push(createdProduct._id);
 
         await currentCategory.save();
-        return res.send(Success(201, 'Product created successfully'));
+        return res.send(Success(201, { createdProduct }));
 
     } catch (error) {
 
