@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { isAdmin } from '../../redux/Slices/userSlice';
-import { Navigate, Outlet } from 'react-router-dom';
-
 
 function Admin() {
 
