@@ -8,7 +8,7 @@ const CreateProduct = () => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
-    const [productImg, setProductImg] = useState('');
+    const [image, setImage] = useState('');
     const [category, setCategory] = useState('');
 
     const categories = useSelector(state => state.categoryReducer.categories);
@@ -20,19 +20,20 @@ const CreateProduct = () => {
         fileReader.readAsDataURL(file);
         fileReader.onload = () => {
             if (fileReader.readyState === fileReader.DONE) {
-                setProductImg(fileReader.result)
+                setImage(fileReader.result)
             }
         }
     }
 
     async function handleSubmit() {
 
+        console.log({ title }, { description }, { image }, { price }, { category });
         try {
 
             const response = await axiosClient.post('/product/create', {
                 title,
                 description,
-                productImg,
+                image,
                 price,
                 category
             })
@@ -45,7 +46,7 @@ const CreateProduct = () => {
         } finally {
 
             setTitle('');
-            setProductImg('');
+            setImage('');
             setDescription('');
             setPrice('');
             setCategory('');
@@ -60,8 +61,8 @@ const CreateProduct = () => {
             <h1 className='center'>Create Product</h1>
             <div className='Createproduct'>
                 <div className="left-part">
-                    {productImg && <div className="img-container">
-                        <img className='post-img' src={productImg} alt="post-img" />
+                    {image && <div className="img-container">
+                        <img className='post-img' src={image} alt="post-img" />
                     </div>}
 
                     <div className="bottom-part">
@@ -78,7 +79,11 @@ const CreateProduct = () => {
                     <input value={title} type="text" className='Input' placeholder=' Enter title here ' onChange={(e) => setTitle(e.target.value)} /> <br />
                     <textarea value={description} className='Input' placeholder=' Enter description here ' onChange={(e) => setDescription(e.target.value)} /> <br />
                     <input value={price} type="text" className='Input' placeholder=' Enter price here ' onChange={(e) => setPrice(e.target.value)} /> <br />
-                    <select className='Input' name="category" id="categories">
+                    <select className='Input'
+                        name="category"
+                        id="categories"
+                        value={category}
+                        onChange={(e) => setCategory(e.target.value)}>
                         <option value="">select category</option>
                         {categories.map((category) =>
                             <option key={category?._id} value={category._id}>{category?.name}</option>

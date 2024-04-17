@@ -37,7 +37,7 @@ function ProductDetail() {
                 <div className="product-layout">
                     <div className="product-img center">
                         <img
-                            src={product?.image}
+                            src={product?.image?.url}
                             alt="product img" />
                     </div>
                     <div className="product-info">

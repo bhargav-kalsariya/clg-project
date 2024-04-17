@@ -12,7 +12,7 @@ function Product({ product }) {
             <div className="product-container">
                 <div className="product-img">
                     <div className="img-container">
-                        <img src={product?.image} alt={product?.title} id='imag' />
+                        <img src={product?.image?.url} alt={product?.title} id='imag' />
                     </div>
                 </div>
                 <div className="product-info">
