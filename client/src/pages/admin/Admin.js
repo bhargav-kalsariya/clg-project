@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { isAdmin } from '../../redux/Slices/userSlice';
+import CreateProduct from '../../components/CreateProduct/CreateProduct';
 
 function Admin() {
 
@@ -19,7 +20,7 @@ function Admin() {
 
         <div>
 
-            {Admin && <h1>hello</h1>}
+            {Admin && <CreateProduct />}
             {!Admin && <h1>you are not admin</h1>}
 
         </div>

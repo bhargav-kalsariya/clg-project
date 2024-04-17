@@ -38,7 +38,12 @@
     }
 
     .nav-right {
-      .nav-cart {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      .nav-cart,
+      .nav-admin {
         position: relative;
         padding: 6px;
 
