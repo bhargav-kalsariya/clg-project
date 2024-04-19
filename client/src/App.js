@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './App.css';
 import { Routes, Route } from 'react-router-dom'
 import Signup from './pages/signup/Signup';
@@ -6,9 +6,6 @@ import Login from './pages/login/Login';
 import Home from './pages/home/Home';
 import AuthorizeUser from './components/AuthorizeUser';
 import IfNotLogin from './components/IfNotLogin';
-import { useDispatch } from 'react-redux'
-import { fetchCategories } from './redux/Slices/CategorySlice';
-import Navbar from './components/Navbar/Navbar';
 import Collection from './pages/collection/Collection';
 import ProductDetail from './pages/productDetails/ProductDetails';
 import Footer from './components/Footer/Footer';
