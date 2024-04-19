@@ -3,6 +3,7 @@ import { KEY_ACCESS_TOKEN, getToken } from '../utilities/localStorageManager';
 import { Outlet, Navigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { getMyProfile } from '../redux/Slices/userSlice';
+import Navbar from './Navbar/Navbar';
 
 function AuthorizeUser() {
 
@@ -17,7 +18,10 @@ function AuthorizeUser() {
 
     return (
 
-        user ? <Outlet /> : <Navigate to='/login' />
+        user ? <>
+            <Navbar />
+            <Outlet />
+        </> : <Navigate to='/login' />
 
     )
 }

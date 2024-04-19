@@ -16,20 +16,10 @@ import Admin from './pages/admin/Admin';
 
 function App() {
 
-    const disPatch = useDispatch();
-
-    useEffect(() => {
-
-        disPatch(fetchCategories());
-
-    }, [disPatch])
-
     return (
         <div className="App">
-            <Navbar />
             <Routes>
                 <Route element={<AuthorizeUser />}>
-
                     <Route path='/' element={<Home />} />
                     <Route path='/category/:categoryId?' element={<Collection />} />
                     <Route path='/products/:productId' element={<ProductDetail />} />
