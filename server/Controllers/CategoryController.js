@@ -1,3 +1,4 @@
+const cloudinary = require('cloudinary').v2;
 const { Category } = require("../Models/CategorySchema");
 const { Failure, Success } = require("../utilities/ResponseWrapper");
 
@@ -17,21 +18,29 @@ const getAllCategoiesHandler = async (req, res) => {
 
 const createCategoryHandler = async (req, res) => {
 
-    const { name } = req.body;
+    const { name, image } = req.body;
 
-    if (!name) {
+    if (!name || !image) {
 
-        return res.send(Failure(404, 'category name is required'));
+        return res.send(Failure(404, 'All fields are required'));
 
     }
 
+    const cloudImg = cloudinary.uploader.upload(image, {
+        folder: 'clg project'
+    })
+
     try {
 
-        await Category.create({
-            name
+        const createdCategory = await Category.create({
+            name,
+            image: {
+                publicId: (await cloudImg).public_id,
+                url: (await cloudImg).secure_url
+            }
         });
 
-        return res.send(Success(201, 'category created successfully'));
+        return res.send(Success(201, { createdCategory }));
 
     } catch (error) {
 

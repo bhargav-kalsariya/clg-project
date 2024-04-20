@@ -12,6 +12,7 @@ function Collection() {
     const [categoryId, setCategoryId] = useState('');
     const [products, setProducts] = useState([]);
     const categories = useSelector(state => state.categoryReducer.categories);
+    const category = params.categoryId;
 
     const sortOptions = [{
         value: 'price - Low To High',
@@ -23,8 +24,10 @@ function Collection() {
 
     const [sortBy, setSortBy] = useState(sortOptions[0].sort);
 
+    const url = category ? `/product/categoryWise/${category}` : `/product/all`;
+
     async function fetchProducts() {
-        const products = await axiosClient.get('/product/all');
+        const products = await axiosClient.get(url);
         setProducts(products.data.result.products);
     }
 

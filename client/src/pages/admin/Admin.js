@@ -46,9 +46,9 @@ function Admin() {
                         <nav className="menu">
                             <ul>
                                 <li onClick={() => setSelectedOption('createProduct')}><IoIosAddCircle className='icons' />Create Product</li> <br />
+                                <li onClick={() => setSelectedOption('createCategory')}><IoIosAddCircle className='icons' />Create Category</li><br />
                                 <li onClick={() => setSelectedOption('updateProduct')}><IoIosAddCircle className='icons' />Update Product</li><br />
                                 <li onClick={() => setSelectedOption('deleteProduct')}><IoIosAddCircle className='icons' />Delete Product</li><br />
-                                <li onClick={() => setSelectedOption('createCategory')}><IoIosAddCircle className='icons' />Create Category</li><br />
                                 <li onClick={() => setSelectedOption('deleteCategory')}><IoIosAddCircle className='icons' />Delete Category</li>
                             </ul>
                         </nav>

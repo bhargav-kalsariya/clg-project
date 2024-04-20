@@ -7,6 +7,11 @@ const categorySchema = mongoose.Schema({
         required: true
     },
 
+    image: {
+        publicId: String,
+        url: String
+    },
+
     products: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Product'
