@@ -39,7 +39,7 @@ function Admin() {
 
     return (
         <>
-            <h1 className="admin-header">Admin Dashboard</h1>
+            {Admin && <h1 className="admin-header">Admin Dashboard</h1>}
             {Admin && (
                 <div className='admin-container'>
                     <div className="flex-menu-rendercompo">

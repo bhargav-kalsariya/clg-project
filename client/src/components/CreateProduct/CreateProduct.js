@@ -68,7 +68,7 @@ const CreateProduct = () => {
                     <div className="bottom-part">
                         <div className="input-post-img">
                             <label htmlFor="userImg" className='lableImg'>
-                                <BsCardImage />
+                                <BsCardImage className='icon' />
                             </label>
                             <input className='inputImg' type="file" accept='image/*' id="userImg" onChange={handleImageChange} />
                         </div>

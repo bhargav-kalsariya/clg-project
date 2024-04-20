@@ -18,7 +18,9 @@ const app = express();
 const port = process.env.PORT || 3000;
 const MainRoute = require('./Routers/MainRoute');
 
-app.use(express.json());
+app.use(express.json({
+    limit: '10MB',
+}));
 app.use(cookie_parser());
 app.use(cors({
     credentials: true,
