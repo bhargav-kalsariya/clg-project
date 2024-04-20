@@ -5,9 +5,9 @@ import { useNavigate } from 'react-router-dom';
 function Category({ category }) {
     const navigate = useNavigate();
     return (
-        <div className='Category' onClick={() => navigate(`category/${category._id}`)}>
+        <div className='Category' style={{ backgroundImage: `url(${category?.image?.url})` }} onClick={() => navigate(`category/${category?._id}`)}>
             <div className="category-content center">
-                <h3 className='heading'>{category.name}</h3>
+                <h3 className='heading'>{category?.name}</h3>
             </div>
         </div>
     )
