@@ -8,7 +8,6 @@ import AuthorizeUser from './components/AuthorizeUser';
 import IfNotLogin from './components/IfNotLogin';
 import Collection from './pages/collection/Collection';
 import ProductDetail from './pages/productDetails/ProductDetails';
-import Footer from './components/Footer/Footer';
 import Admin from './pages/admin/Admin';
 
 function App() {
@@ -31,7 +30,6 @@ function App() {
 
                 </Route>
             </Routes>
-            <Footer />
         </div>
     );
 }

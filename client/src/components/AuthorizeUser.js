@@ -4,6 +4,7 @@ import { Outlet, Navigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { getMyProfile } from '../redux/Slices/userSlice';
 import Navbar from './Navbar/Navbar';
+import Footer from './Footer/Footer';
 
 function AuthorizeUser() {
 
@@ -21,6 +22,7 @@ function AuthorizeUser() {
         user ? <>
             <Navbar />
             <Outlet />
+            <Footer />
         </> : <Navigate to='/login' />
 
     )
