@@ -33,10 +33,7 @@ axiosClient.interceptors.response.use(
 
         }
 
-        if (response.statusCode === 401 && !response.config?.url_retry) {
-
-            response.config = response.config;
-            response.config.url_retry = true;
+        if (response.statusCode === 401 && !res.config.url_retry) {
 
             const result = await axios.create({
 
