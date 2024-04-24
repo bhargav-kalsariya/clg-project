@@ -83,11 +83,42 @@ const createProductHandler = async (req, res) => {
 
 };
 
+const deleteProductHandler = async (req, res) => {
+
+    const { productId } = req.params;
+
+    try {
+
+        const product = await Product.findById(productId);
+        console.log(product);
+        if (!product) {
+
+            return res.send(Failure(404, 'product not found'));
+
+        }
+
+        await Category.updateOne(
+            { _id: product.category },
+            { $pull: { products: productId } }
+        )
+
+        await Product.deleteOne({ _id: productId });
+
+        return res.send(Success(200, 'Product deleted successfully'));
+
+    } catch (error) {
+
+        return res.send(Failure(500, `Error while deleting product ${error.message}`));
+
+    }
+};
+
 module.exports = {
 
     getAllProductsHandler,
     getParticularProductHandler,
     createProductHandler,
-    getProductCategoryWiseHandler
+    getProductCategoryWiseHandler,
+    deleteProductHandler
 
 };
