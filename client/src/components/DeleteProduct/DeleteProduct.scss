@@ -1,23 +1,22 @@
 .ProductList {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
 
   .ProductItem {
-    width: calc(50% - 40px);
+    width: calc(100% - 40px);
     border: 1px solid #ccc;
-    margin: 20px;
+    margin: 10px;
 
     .product-container {
       display: flex;
       align-items: center;
+      gap: 20px;
       height: 100%;
-      padding: 10px;
+      padding-inline: 10px;
 
       .product-img {
         flex: 0 0 30%;
         display: flex;
-        justify-content: space-between;
         align-items: center;
 
         .img-container {

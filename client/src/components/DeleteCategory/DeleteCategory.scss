@@ -1,0 +1,59 @@
+.CategoryList {
+  display: flex;
+  flex-wrap: wrap;
+
+  .CategoryItem {
+    width: calc(100% - 40px);
+    border: 1px solid #ccc;
+    margin: 10px;
+
+    .category-container {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      height: 100%;
+      padding-inline: 10px;
+
+      .category-img {
+        flex: 0 0 30%;
+        display: flex;
+        align-items: center;
+
+        .img-container {
+          max-width: 120px;
+          height: 120px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+          }
+        }
+      }
+
+      .category-info {
+        display: flex;
+        align-items: center;
+        flex: 1;
+        justify-content: space-between;
+
+        .category-title {
+          font-weight: bold;
+          margin: 0;
+        }
+
+        .delete-button {
+          padding: 10px 20px;
+          background-color: #ff0000;
+          border-radius: 5px;
+          color: #fff;
+          border: none;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
