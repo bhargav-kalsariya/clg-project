@@ -5,7 +5,6 @@ import { axiosClient } from '../../utilities/axiosClient';
 function DeleteProduct() {
 
     const [products, setProducts] = useState([]);
-    const [productId, setProductId] = useState('');
 
     async function fetchData() {
         const product = await axiosClient.get(`/product/all`);
@@ -13,9 +12,13 @@ function DeleteProduct() {
     }
     useEffect(() => {
         fetchData()
-    }, [])
+    }, [products])
 
-    async function handleDelete() { }
+    async function handleDelete(productId) {
+
+        await axiosClient.delete(`/product/delete/${productId}`);
+
+    }
 
     return (
         <div className='ProductList'>
@@ -32,7 +35,7 @@ function DeleteProduct() {
                             <div className="product-title">{product?.title}</div>
                             <div className="product-price">
                                 ₹ {product?.price}</div>
-                            <button className="delete-button" onClick={handleDelete}>Delete</button>
+                            <button className="delete-button" onClick={() => handleDelete(product?._id)}>Delete</button>
                         </div>
                     </div>
                 </div>
