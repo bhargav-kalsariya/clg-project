@@ -113,30 +113,6 @@ const deleteProductHandler = async (req, res) => {
     }
 };
 
-const deleteCategoryHandler = async (req, res) => {
-
-    const { categoryId } = req.params;
-
-    try {
-
-        const category = await Category.findById(categoryId);
-
-        if (!category) {
-
-            return res.send(Failure(404, 'category not found'));
-
-        }
-
-        return res.send(Success(200, { category }));
-
-    } catch (error) {
-
-        return res.send(Failure(500, `Error while deleting product ${error.message}`));
-
-    }
-
-};
-
 module.exports = {
 
     getAllProductsHandler,
@@ -144,6 +120,5 @@ module.exports = {
     createProductHandler,
     getProductCategoryWiseHandler,
     deleteProductHandler,
-    deleteCategoryHandler
 
 };

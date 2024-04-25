@@ -8,6 +8,5 @@ router.get('/:productId', AuthoraizedUser, ProductController.getParticularProduc
 router.post('/create', AuthoraizedUser, isAdmin, ProductController.createProductHandler);
 router.get('/categoryWise/:categoryId', AuthoraizedUser, ProductController.getProductCategoryWiseHandler);
 router.delete('/delete/:productId', AuthoraizedUser, isAdmin, ProductController.deleteProductHandler);
-router.delete('/delete/:categoryId', AuthoraizedUser, isAdmin, ProductController.deleteCategoryHandler);
 
 module.exports = router;

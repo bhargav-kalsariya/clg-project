@@ -5,5 +5,7 @@ const isAdmin = require('../Middlewares/isAdmin');
 
 router.get('/', AuthoraizedUser, CategoryController.getAllCategoiesHandler);
 router.post('/create', AuthoraizedUser, isAdmin, CategoryController.createCategoryHandler);
+router.delete('/delete/:categoryId', AuthoraizedUser, isAdmin, CategoryController.deleteCategoryHandler);
+
 
 module.exports = router;

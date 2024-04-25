@@ -1,5 +1,6 @@
 const cloudinary = require('cloudinary').v2;
 const { Category } = require("../Models/CategorySchema");
+const { Product } = require('../Models/ProductSchema');
 const { Failure, Success } = require("../utilities/ResponseWrapper");
 
 const getAllCategoiesHandler = async (req, res) => {
@@ -50,9 +51,29 @@ const createCategoryHandler = async (req, res) => {
 
 };
 
+const deleteCategoryHandler = async (req, res) => {
+
+    const { categoryId } = req.params;
+
+    try {
+
+        await Category.findByIdAndDelete(categoryId);
+        await Product.deleteMany({ category: categoryId });
+
+        return res.send(Success(200, 'Category deleted successfully'));
+
+    } catch (error) {
+
+        return res.send(Failure(500, `Error while deleting Category ${error.message}`));
+
+    }
+
+};
+
 module.exports = {
 
     getAllCategoiesHandler,
-    createCategoryHandler
+    createCategoryHandler,
+    deleteCategoryHandler
 
 }

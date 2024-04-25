@@ -1,17 +1,25 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './DeleteCategory.scss';
-import { useSelector } from 'react-redux';
 import { axiosClient } from '../../utilities/axiosClient';
 
 function DeleteCategory() {
 
-    const categories = useSelector(state => state.categoryReducer?.categories);
+    const [categories, setCategories] = useState([]);
 
-    // async function handleDelete(categoryId) {
+    async function fetchData() {
+        const product = await axiosClient.get(`/category/`);
+        setCategories(product.data.result.category);
+    }
 
-    //     await axiosClient.delete(`/category/delete/${categoryId}`);
+    async function handleDelete(categoryId) {
 
-    // }
+        await axiosClient.delete(`/category/delete/${categoryId}`);
+
+    }
+
+    useEffect(() => {
+        fetchData();
+    }, [categories])
 
     return (
         <div className='CategoryList'>
