@@ -22,8 +22,8 @@ function DeleteCategory() {
     return (
         <div className='CategoryList'>
 
-            {categories.map((category) =>
-                <div className='CategoryItem'>
+            {categories?.map((category) =>
+                <div className='CategoryItem' key={category._id}>
                     <div className="category-container">
                         <div className="category-img">
                             <div className="img-container">

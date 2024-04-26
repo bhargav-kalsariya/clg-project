@@ -58,7 +58,7 @@ function Admin() {
                     </div>
                 </div>
             )}
-            {!Admin && <h1>you are not admin</h1>}
+            {!Admin && <h1 className='not-admin-warning'>you are not admin</h1>}
         </>
     );
 }

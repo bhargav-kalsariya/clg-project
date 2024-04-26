@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './DeleteProduct.scss'
 import { axiosClient } from '../../utilities/axiosClient';
+import Loader from '../Loader/Loader';
 
 function DeleteProduct() {
 
@@ -23,8 +24,8 @@ function DeleteProduct() {
     return (
         <div className='ProductList'>
 
-            {products.map((product) =>
-                <div className='ProductItem'>
+            {products?.map((product) =>
+                <div className='ProductItem' key={product._id}>
                     <div className="product-container">
                         <div className="product-img">
                             <div className="img-container">
