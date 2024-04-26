@@ -1,15 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import './DeleteCategory.scss';
 import { axiosClient } from '../../utilities/axiosClient';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchCategories } from '../../redux/Slices/CategorySlice';
 
 function DeleteCategory() {
 
-    const [categories, setCategories] = useState([]);
+    // const [categories, setCategories] = useState([]);
+    const dispatch = useDispatch();
 
-    async function fetchData() {
-        const product = await axiosClient.get(`/category/`);
-        setCategories(product.data.result.category);
-    }
+    const categories = useSelector(state => state.categoryReducer.categories);
+    console.log({ categories });
+
+    // async function fetchData() {
+    //     const product = await axiosClient.get(`/category/`);
+    //     setCategories(product.data.result.category);
+    // }
 
     async function handleDelete(categoryId) {
 
@@ -18,8 +24,8 @@ function DeleteCategory() {
     }
 
     useEffect(() => {
-        fetchData();
-    }, [categories])
+        dispatch(fetchCategories());
+    }, [categories]);
 
     return (
         <div className='CategoryList'>

@@ -1,12 +1,21 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './CreateCategory.scss';
 import { BsCardImage } from 'react-icons/bs';
 import { axiosClient } from '../../utilities/axiosClient';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchCategories } from '../../redux/Slices/CategorySlice';
 
 function CreateCategory() {
 
+    const dispatch = useDispatch();
+    const categories = useSelector(state => state.categoryReducer.categories);
+
     const [name, setName] = useState('');
     const [image, setImage] = useState('');
+
+    useEffect(() => {
+        dispatch(fetchCategories());
+    }, [categories]);
 
     function handleImageChange(e) {
         const file = e.target.files[0];

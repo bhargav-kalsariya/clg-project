@@ -11,7 +11,7 @@ function Collection() {
     const params = useParams();
     const [categoryId, setCategoryId] = useState('');
     const [products, setProducts] = useState([]);
-    const categories = useSelector(state => state.categoryReducer.categories);
+    const categories = useSelector(state => state.categoryReducer?.categories);
     const category = params.categoryId;
 
     const sortOptions = [{
@@ -28,7 +28,7 @@ function Collection() {
 
     async function fetchProducts() {
         const products = await axiosClient.get(url);
-        setProducts(products.data.result.products);
+        setProducts(products?.data.result.products);
     }
 
     useEffect(() => {
