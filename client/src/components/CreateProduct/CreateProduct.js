@@ -12,7 +12,6 @@ const CreateProduct = () => {
     const [category, setCategory] = useState('');
 
     const categories = useSelector(state => state.categoryReducer.categories);
-    console.log(categories);
 
     function handleImageChange(e) {
         const file = e.target.files[0];
@@ -27,17 +26,15 @@ const CreateProduct = () => {
 
     async function handleSubmit() {
 
-        console.log({ title }, { description }, { image }, { price }, { category });
         try {
 
-            const response = await axiosClient.post('/product/create', {
+            await axiosClient.post('/product/create', {
                 title,
                 description,
                 image,
                 price,
                 category
             })
-            console.log('create post', response);
 
         } catch (error) {
 

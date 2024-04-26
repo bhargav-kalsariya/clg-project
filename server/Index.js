@@ -28,8 +28,4 @@ app.use(cors({
 }));
 app.use('/api', MainRoute);
 
-app.listen(port, () => {
-
-    console.log('listening on port ' + port);
-
-});
+app.listen(port);

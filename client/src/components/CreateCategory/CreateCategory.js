@@ -15,7 +15,7 @@ function CreateCategory() {
 
     useEffect(() => {
         dispatch(fetchCategories());
-    }, [categories]);
+    }, [categories, dispatch]);
 
     function handleImageChange(e) {
         const file = e.target.files[0];
@@ -27,16 +27,15 @@ function CreateCategory() {
             }
         }
     }
+
     async function handleSubmit() {
 
-        console.log({ name }, { image });
         try {
 
-            const response = await axiosClient.post('/category/create', {
+            await axiosClient.post('/category/create', {
                 name,
                 image
             })
-            console.log('create post', response);
 
         } catch (error) {
 

@@ -41,8 +41,6 @@ axiosClient.interceptors.response.use(
 
             }).get(`${process.env.REACT_APP_SERVER_BASE_URL}/auth/refresh`);
 
-            console.log({ res: result.data });
-
             if (result.data.status === 'success') {
 
                 const accessToken = result.data.result.accessToken;

@@ -9,11 +9,10 @@ const connect = async () => {
     try {
 
         await mongoose.connect(configrationUrl);
-        console.log('connection secured');
 
     } catch (error) {
 
-        console.log(error);
+        process.exit(1);
 
     }
 

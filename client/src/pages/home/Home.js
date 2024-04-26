@@ -7,16 +7,19 @@ import { axiosClient } from '../../utilities/axiosClient';
 import { useSelector } from 'react-redux';
 
 function Home() {
+
     const categories = useSelector(state => state.categoryReducer?.categories);
-    console.log(categories);
     const [topProducts, setTopProducts] = useState(null);
+
     async function fetchData() {
         const topProductsResponse = await axiosClient.get(`/product/all`);
         setTopProducts(topProductsResponse.data.result.products);
     }
+
     useEffect(() => {
         fetchData()
     }, [])
+
     return (
         <div className='Home'>
             <Hero />

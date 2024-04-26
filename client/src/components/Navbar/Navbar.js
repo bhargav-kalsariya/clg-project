@@ -28,17 +28,9 @@ function Navbar() {
 
     async function handleLogoutClicked() {
 
-        try {
-
-            await axiosClient.get('/auth/logout');
-            removeToken(KEY_ACCESS_TOKEN);
-            navigate('/login');
-
-        } catch (e) {
-
-            console.log(e);
-
-        }
+        await axiosClient.get('/auth/logout');
+        removeToken(KEY_ACCESS_TOKEN);
+        navigate('/login');
 
     }
 

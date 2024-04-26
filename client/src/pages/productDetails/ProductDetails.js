@@ -14,14 +14,13 @@ function ProductDetail() {
     const cart = useSelector(state => state.cartReducer.cart);
     const quantity = cart.find(item => item._id === params.productId)?.quantity || 0;
 
-    console.log(params.productId, { product });
-
     async function fetchData() {
 
         const productResponse = await axiosClient.get(`/product/${params.productId}`);
         setProduct(productResponse.data.result.productDetails);
 
     }
+
     useEffect(() => {
         setProduct(null);
         fetchData();

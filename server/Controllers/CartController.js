@@ -69,7 +69,6 @@ const updateProductQuantityHandler = async (req, res) => {
 
         } else {
 
-            console.log(currentUser.cart);
             currentUser.cart[index].quantity += 1;
 
             await product.save();

@@ -24,10 +24,6 @@ function Signup() {
 
             navigate('/login');
 
-        } else {
-
-            console.log(result.data);
-
         }
     }
 
