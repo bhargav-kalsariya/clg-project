@@ -6,5 +6,6 @@ router.post('/addProduct', AuthoraizedUser, CartController.addProductToCartHandl
 router.delete('/removeProduct', AuthoraizedUser, CartController.removeProductFromCartHandler);
 router.put('/updateQuantity', AuthoraizedUser, CartController.updateProductQuantityHandler);
 router.put('/decreaseQuantity', AuthoraizedUser, CartController.decreaseProductQuantityHandler);
+router.post('/checkout', AuthoraizedUser, CartController.cartItemCheckoutHandler);
 
 module.exports = router;

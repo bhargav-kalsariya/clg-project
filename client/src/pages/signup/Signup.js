@@ -45,7 +45,7 @@ function Signup() {
                     <input type="submit" className="submit" id="" />
                 </form>
                 <p className='subheading'>Already have an account?
-                    <Link to='/login'>Login</Link>
+                    <Link to='/login' className='login-btn'>  Login</Link>
                 </p>
             </div>
         </div>
