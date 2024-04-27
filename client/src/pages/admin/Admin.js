@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { isAdmin } from '../../redux/Slices/userSlice';
 import CreateProduct from '../../components/CreateProduct/CreateProduct';
-import UpdateProduct from '../../components/UpdateProduct/UpdateProduct';
 import DeleteProduct from '../../components/DeleteProduct/DeleteProduct';
 import CreateCategory from '../../components/CreateCategory/CreateCategory';
 import DeleteCategory from '../../components/DeleteCategory/DeleteCategory';
@@ -24,8 +23,6 @@ function Admin() {
         switch (selectedOption) {
             case 'createProduct':
                 return <CreateProduct />;
-            case 'updateProduct':
-                return <UpdateProduct />;
             case 'deleteProduct':
                 return <DeleteProduct />;
             case 'createCategory':
@@ -47,7 +44,6 @@ function Admin() {
                             <ul>
                                 <li onClick={() => setSelectedOption('createProduct')}><IoIosAddCircle className='icons' />Create Product</li> <br />
                                 <li onClick={() => setSelectedOption('createCategory')}><IoIosAddCircle className='icons' />Create Category</li><br />
-                                <li onClick={() => setSelectedOption('updateProduct')}><IoIosAddCircle className='icons' />Update Product</li><br />
                                 <li onClick={() => setSelectedOption('deleteProduct')}><IoIosAddCircle className='icons' />Delete Product</li><br />
                                 <li onClick={() => setSelectedOption('deleteCategory')}><IoIosAddCircle className='icons' />Delete Category</li>
                             </ul>
