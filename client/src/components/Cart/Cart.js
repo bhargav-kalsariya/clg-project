@@ -25,7 +25,7 @@ function Cart({ onClose }) {
             });
             console.log({ response });
 
-            const sessionId = response?.data?.sessionId;
+            const sessionId = response?.data?.result?.sessionId;
             if (!sessionId) {
                 console.error("SessionId not provided in the response");
                 return;
