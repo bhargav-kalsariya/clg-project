@@ -17,15 +17,29 @@ function Cart({ onClose }) {
         totalAmount += (item.quantity * item.price);
     });
     const isCartEmpty = cart.length === 0
+
     async function handleCheckout() {
-        const response = await axiosClient.post('/cart/checkout', {
-            products: cart
-        });
-        const stripe = await stripePromise
-        await stripe.redirectToCheckout({
-            sessionId: response.data.stripeId
-        })
+        try {
+            const response = await axiosClient.post('/cart/checkout', {
+                products: cart
+            });
+            console.log({ response });
+
+            const sessionId = response?.data?.sessionId;
+            if (!sessionId) {
+                console.error("SessionId not provided in the response");
+                return;
+            }
+
+            const stripe = await stripePromise;
+            await stripe.redirectToCheckout({
+                sessionId: sessionId
+            });
+        } catch (error) {
+            console.error("Error during checkout:", error);
+        }
     }
+
 
     return (
         <div className='Cart'>

@@ -9,6 +9,7 @@ import IfNotLogin from './components/IfNotLogin';
 import Collection from './pages/collection/Collection';
 import ProductDetail from './pages/productDetails/ProductDetails';
 import Admin from './pages/admin/Admin';
+import Payments from './components/Payments/Payments';
 
 function App() {
 
@@ -17,9 +18,10 @@ function App() {
             <Routes>
                 <Route element={<AuthorizeUser />}>
                     <Route path='/' element={<Home />} />
+                    <Route path='/admin/dashboard' element={<Admin />} />
                     <Route path='/category/:categoryId?' element={<Collection />} />
                     <Route path='/products/:productId' element={<ProductDetail />} />
-                    <Route path='/admin/dashboard' element={<Admin />} />
+                    <Route path='/payments/:status' element={<Payments />} />
 
 
                 </Route>

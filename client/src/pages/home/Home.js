@@ -37,7 +37,7 @@ function Home() {
 
             <section className="collection container">
                 <div className="info">
-                    <div className="heading">Our Top Picks</div>
+                    <div className="heading">Our Products</div>
                     <p className="subheading">
                         All New Designs, Same Old Details.
                     </p>
