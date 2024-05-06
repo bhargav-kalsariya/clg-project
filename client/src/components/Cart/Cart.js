@@ -23,7 +23,6 @@ function Cart({ onClose }) {
             const response = await axiosClient.post('/cart/checkout', {
                 products: cart
             });
-            console.log({ response });
 
             const sessionId = response?.data?.result?.sessionId;
             if (!sessionId) {

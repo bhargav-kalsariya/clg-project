@@ -1,5 +1,3 @@
-const { Product } = require("../Models/ProductSchema");
-const { User } = require("../Models/UserSchema");
 const { Failure, Success } = require("../utilities/ResponseWrapper");
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
