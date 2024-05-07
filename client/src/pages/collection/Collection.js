@@ -27,7 +27,11 @@ function Collection() {
     const url = category ? `/product/categoryWise/${category}` : `/product/all`;
 
     async function fetchProducts() {
-        const products = await axiosClient.get(url);
+        const products = await axiosClient.get(url, {
+            params: {
+                sortBy: sortBy
+            }
+        });
         setProducts(products?.data.result.products);
     }
 
@@ -36,7 +40,7 @@ function Collection() {
         setCategoryId(params.categoryId);
         fetchProducts();
 
-    }, [params])
+    }, [params, sortBy])
 
     function updateCategory(e) {
         navigate(`/category/${e.target.value}`)

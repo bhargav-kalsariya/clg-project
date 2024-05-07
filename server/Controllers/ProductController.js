@@ -5,7 +5,19 @@ const cloudinary = require('cloudinary').v2;
 
 const getAllProductsHandler = async (req, res) => {
 
-    const products = await Product.find();
+    let { sortBy } = req.query;
+
+    let products = await Product.find();
+
+    if (sortBy === 'price') {
+
+        products.sort((a, b) => a.price - b.price);
+
+    } else if (sortBy === 'createdAt') {
+
+        products.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+    }
 
     return res.send(Success(200, { products }));
 
@@ -30,11 +42,25 @@ const getParticularProductHandler = async (req, res) => {
 const getProductCategoryWiseHandler = async (req, res) => {
 
     const { categoryId } = req.params;
+    let { sortBy } = req.query;
+
     const category = await Category.findById(categoryId).populate('products');
 
     if (!category) {
 
         return res.send(Failure(404, 'product not found with this category'));
+
+    }
+
+    let products = category.products;
+
+    if (sortBy === 'price') {
+
+        products.sort((a, b) => a.price - b.price);
+
+    } else if (sortBy === 'createdAt') {
+
+        products.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
     }
 
