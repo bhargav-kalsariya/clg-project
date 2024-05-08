@@ -9,15 +9,20 @@ import { AiOutlineLogout } from 'react-icons/ai';
 import { axiosClient } from '../../utilities/axiosClient';
 import { fetchCategories } from '../../redux/Slices/CategorySlice';
 import { removeToken, KEY_ACCESS_TOKEN } from '../../utilities/localStorageManager';
+import { isAdmin } from '../../redux/Slices/userSlice';
 
 function Navbar() {
     const disPatch = useDispatch();
 
+    const curUser = useSelector(state => state.userReducer?.myProfile);
+    const Admin = useSelector(state => state.userReducer?.isAdmin);
+
     useEffect(() => {
 
         disPatch(fetchCategories());
+        curUser?.isAdmin ? disPatch(isAdmin(true)) : disPatch(isAdmin(false));
 
-    }, [disPatch])
+    }, [disPatch, curUser, Admin]);
 
     const navigate = useNavigate();
     const [openCart, setOpenCart] = useState(false);
@@ -56,9 +61,11 @@ function Navbar() {
                         <div className="nav-logout hover-link" onClick={handleLogoutClicked} >
                             <AiOutlineLogout className='icon' />
                         </div>
-                        <div className="nav-admin hover-link" onClick={() => navigate('/admin/dashboard')}>
-                            <MdAdminPanelSettings className='icon' />
-                        </div>
+                        {Admin &&
+                            <div className="nav-admin hover-link" onClick={() => navigate('/admin/dashboard')}>
+                                <MdAdminPanelSettings className='icon' />
+                            </div>
+                        }
                         <div className="nav-cart hover-link" onClick={() => setOpenCart(!openCart)}>
                             <BsCart2 className="icon" />
                             {totalItems > 0 && <span className='cart-count center'> {totalItems} </span>}

@@ -8,13 +8,14 @@ import { fetchCategories } from '../../redux/Slices/CategorySlice';
 function CreateCategory() {
 
     const dispatch = useDispatch();
+    const categories = useSelector(state => state.categoryReducer.categories);
 
     const [name, setName] = useState('');
     const [image, setImage] = useState('');
 
     useEffect(() => {
         dispatch(fetchCategories());
-    }, [dispatch]);
+    }, [categories, dispatch]);
 
     function handleImageChange(e) {
         const file = e.target.files[0];

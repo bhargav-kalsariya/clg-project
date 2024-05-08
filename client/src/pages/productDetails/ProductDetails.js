@@ -24,7 +24,7 @@ function ProductDetail() {
     useEffect(() => {
         setProduct(null);
         fetchData();
-    }, [params])
+    }, [params, disPatch])
 
     if (!product) {
         return <Loader />;
