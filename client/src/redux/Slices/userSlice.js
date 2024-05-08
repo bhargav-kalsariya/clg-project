@@ -19,7 +19,9 @@ const userSlice = createSlice({
     initialState: {
 
         myProfile: null,
-        isAdmin: false
+        isAdmin: false,
+        toastData: {},
+        isLoading: false
 
     },
     reducers: {
@@ -27,6 +29,16 @@ const userSlice = createSlice({
         isAdmin: (state, action) => {
 
             state.isAdmin = action.payload;
+
+        },
+        setLoading: (state, action) => {
+
+            state.isLoading = action?.payload;
+
+        },
+        showToast: (state, action) => {
+
+            state.toastData = action.payload;
 
         }
 
@@ -43,4 +55,4 @@ const userSlice = createSlice({
 
 export default userSlice.reducer;
 
-export const { isAdmin } = userSlice.actions;
+export const { isAdmin, showToast, setLoading } = userSlice.actions;

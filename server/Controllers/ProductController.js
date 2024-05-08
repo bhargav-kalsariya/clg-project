@@ -99,7 +99,7 @@ const createProductHandler = async (req, res) => {
         currentCategory.products.push(createdProduct._id);
 
         await currentCategory.save();
-        return res.send(Success(201, { createdProduct }));
+        return res.send(Success(201, 'product created successfully'));
 
     } catch (error) {
 

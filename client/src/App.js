@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import './App.css';
 import { Routes, Route } from 'react-router-dom'
 import Signup from './pages/signup/Signup';
@@ -10,11 +10,53 @@ import Collection from './pages/collection/Collection';
 import ProductDetail from './pages/productDetails/ProductDetails';
 import Admin from './pages/admin/Admin';
 import Payments from './components/Payments/Payments';
+import toast, { Toaster } from 'react-hot-toast';
+import LoadingBar from 'react-top-loading-bar'
+import { useSelector } from 'react-redux';
+
+export const TOAST_SUCCESS = 'toast-success'
+export const TOAST_FAILURE = 'toast-failure'
 
 function App() {
 
+    const toastData = useSelector(state => state.userReducer.toastData);
+    const isLoading = useSelector(state => state.userReducer.isLoading);
+    const LoadingRef = useRef(null);
+
+    useEffect(() => {
+
+        if (isLoading) {
+            LoadingRef.current?.continuousStart();
+        } else {
+            LoadingRef.current?.complete();
+        }
+
+    })
+
+    useEffect(() => {
+
+        switch (toastData.type) {
+            case TOAST_SUCCESS:
+                toast.success(toastData.message);
+                break;
+
+            case TOAST_FAILURE:
+                toast.error(toastData.message);
+                break;
+
+            default:
+                break;
+
+        }
+
+    }, [toastData])
+
     return (
         <div className="App">
+
+            <LoadingBar color='blue' ref={LoadingRef} />
+            <div><Toaster /></div>
+
             <Routes>
                 <Route element={<AuthorizeUser />}>
                     <Route path='/' element={<Home />} />

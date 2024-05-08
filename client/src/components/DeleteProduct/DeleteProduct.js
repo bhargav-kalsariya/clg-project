@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './DeleteProduct.scss'
 import { axiosClient } from '../../utilities/axiosClient';
-import Loader from '../Loader/Loader';
 
 function DeleteProduct() {
 

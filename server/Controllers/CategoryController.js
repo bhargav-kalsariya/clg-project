@@ -41,7 +41,7 @@ const createCategoryHandler = async (req, res) => {
             }
         });
 
-        return res.send(Success(201, { createdCategory }));
+        return res.send(Success(201, 'category created successfully'));
 
     } catch (error) {
 
