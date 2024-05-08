@@ -54,7 +54,7 @@ function App() {
     return (
         <div className="App">
 
-            <LoadingBar color='blue' ref={LoadingRef} />
+            <LoadingBar color='Magenta' ref={LoadingRef} />
             <div><Toaster /></div>
 
             <Routes>

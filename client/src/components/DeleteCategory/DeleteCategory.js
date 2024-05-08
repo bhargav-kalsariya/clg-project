@@ -9,15 +9,16 @@ function DeleteCategory() {
     const dispatch = useDispatch();
     const categories = useSelector(state => state.categoryReducer.categories);
 
+    useEffect(() => {
+        dispatch(fetchCategories());
+    }, [dispatch]);
+
     async function handleDelete(categoryId) {
 
         await axiosClient.delete(`/category/delete/${categoryId}`);
+        dispatch(fetchCategories());
 
     }
-
-    useEffect(() => {
-        dispatch(fetchCategories());
-    }, [categories, dispatch]);
 
     return (
         <div className='CategoryList'>

@@ -12,12 +12,12 @@ function DeleteProduct() {
     }
     useEffect(() => {
         fetchData()
-    }, [products])
+    }, [])
 
     async function handleDelete(productId) {
 
         await axiosClient.delete(`/product/delete/${productId}`);
-
+        fetchData();
     }
 
     return (
