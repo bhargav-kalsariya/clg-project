@@ -14,8 +14,10 @@ function CreateCategory() {
     const [image, setImage] = useState('');
 
     useEffect(() => {
-        dispatch(fetchCategories());
-    }, [categories, dispatch]);
+        if (!categories.length) {
+            dispatch(fetchCategories());
+        }
+    }, [categories.length, dispatch]);
 
     function handleImageChange(e) {
         const file = e.target.files[0];

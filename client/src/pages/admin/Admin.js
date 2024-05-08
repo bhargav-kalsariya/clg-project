@@ -28,7 +28,7 @@ function Admin() {
     return (
         <>
             <h1 className="admin-header">Admin Dashboard</h1>
-            (
+
             <div className='admin-container'>
                 <div className="flex-menu-rendercompo">
                     <nav className="menu">
@@ -44,8 +44,7 @@ function Admin() {
                     </div>
                 </div>
             </div>
-            )
-            <h1 className='not-admin-warning'>you are not admin</h1>
+
         </>
     );
 }

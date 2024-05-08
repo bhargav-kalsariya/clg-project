@@ -40,7 +40,7 @@ function Collection() {
         setCategoryId(params.categoryId);
         fetchProducts();
 
-    }, [params, sortBy])
+    }, [params.categoryId, sortBy])
 
     function updateCategory(e) {
         navigate(`/category/${e.target.value}`)
