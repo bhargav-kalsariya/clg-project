@@ -31,7 +31,7 @@ const SignupHandler = async (req, res) => {
             password: securedPassword
         })
 
-        return res.send(Success(201, 'user created successfully'));
+        return res.send(Success(201, 'user created now please login'));
 
     }
 

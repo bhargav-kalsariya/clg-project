@@ -14,15 +14,15 @@ function Signup() {
 
         e.preventDefault();
 
-        const result = await axiosClient.post('/auth/signup', {
+        const response = await axiosClient.post('/auth/signup', {
             name,
             email,
             password
         });
 
-        if (result.data.status === 'success') {
+        if (response) {
 
-            navigate('/login');
+            return navigate('/login');
 
         }
     }
