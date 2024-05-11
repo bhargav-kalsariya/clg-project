@@ -21,9 +21,12 @@ function Login() {
                 password
             });
 
-            setToken(KEY_ACCESS_TOKEN, response.data.result.accessToken);
+            if (response) {
 
-            naviget('/');
+                setToken(KEY_ACCESS_TOKEN, response.data.result.accessToken);
+                naviget('/');
+
+            }
 
         } catch (error) {
 
